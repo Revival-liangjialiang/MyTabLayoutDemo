@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -116,7 +117,7 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
 
         //get layout_height
         String height = attrs.getAttributeValue("http://schemas.android.com/apk/res/android", "layout_height");
-
+        Log.i("ok","height=------------------------------------"+height);
         //create ViewPager
         if (height.equals(ViewGroup.LayoutParams.MATCH_PARENT + "")) {
         } else if (height.equals(ViewGroup.LayoutParams.WRAP_CONTENT + "")) {
@@ -161,7 +162,6 @@ public class SlidingTabLayout extends HorizontalScrollView implements ViewPager.
         mTabSpaceEqual = ta.getBoolean(R.styleable.SlidingTabLayout_tl_tab_space_equal, false);
         mTabWidth = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_width, dp2px(-1));
         mTabPadding = ta.getDimension(R.styleable.SlidingTabLayout_tl_tab_padding, mTabSpaceEqual || mTabWidth > 0 ? dp2px(0) : dp2px(20));
-
         ta.recycle();
     }
 

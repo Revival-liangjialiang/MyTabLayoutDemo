@@ -37,7 +37,7 @@ import java.util.ArrayList;
 /** 没有继承HorizontalScrollView不能滑动,对于ViewPager无依赖 */
 public class CommonTabLayout extends FrameLayout implements ValueAnimator.AnimatorUpdateListener {
     private Context mContext;
-    private ArrayList<CustomTabEntity> mTabEntitys = new ArrayList<>();
+    private ArrayList<CustomTabEntity> mTabEntitysList = new ArrayList<>();
     private LinearLayout mTabsContainer;
     private int mCurrentTab;
     private int mLastTab;
@@ -192,8 +192,8 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             throw new IllegalStateException("TabEntitys can not be NULL or EMPTY !");
         }
 
-        this.mTabEntitys.clear();
-        this.mTabEntitys.addAll(tabEntitys);
+        this.mTabEntitysList.clear();
+        this.mTabEntitysList.addAll(tabEntitys);
 
         notifyDataSetChanged();
     }
@@ -207,7 +207,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     /** 更新数据 */
     public void notifyDataSetChanged() {
         mTabsContainer.removeAllViews();
-        this.mTabCount = mTabEntitys.size();
+        this.mTabCount = mTabEntitysList.size();
         View tabView;
         for (int i = 0; i < mTabCount; i++) {
             if (mIconGravity == Gravity.LEFT) {
@@ -230,9 +230,9 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
     /** 创建并添加tab */
     private void addTab(final int position, View tabView) {
         TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
-        tv_tab_title.setText(mTabEntitys.get(position).getTabTitle());
+        tv_tab_title.setText(mTabEntitysList.get(position).getTabTitle());
         ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);
-        iv_tab_icon.setImageResource(mTabEntitys.get(position).getTabUnselectedIcon());
+        iv_tab_icon.setImageResource(mTabEntitysList.get(position).getTabUnselectedIcon());
 
         tabView.setOnClickListener(new OnClickListener() {
             @Override
@@ -280,7 +280,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);
             if (mIconVisible) {
                 iv_tab_icon.setVisibility(View.VISIBLE);
-                CustomTabEntity tabEntity = mTabEntitys.get(i);
+                CustomTabEntity tabEntity = mTabEntitysList.get(i);
                 iv_tab_icon.setImageResource(i == mCurrentTab ? tabEntity.getTabSelectedIcon() : tabEntity.getTabUnselectedIcon());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         mIconWidth <= 0 ? LinearLayout.LayoutParams.WRAP_CONTENT : (int) mIconWidth,
@@ -309,7 +309,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             TextView tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);
             tab_title.setTextColor(isSelect ? mTextSelectColor : mTextUnselectColor);
             ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);
-            CustomTabEntity tabEntity = mTabEntitys.get(i);
+            CustomTabEntity tabEntity = mTabEntitysList.get(i);
             iv_tab_icon.setImageResource(isSelect ? tabEntity.getTabSelectedIcon() : tabEntity.getTabUnselectedIcon());
         }
     }
@@ -860,7 +860,7 @@ public class CommonTabLayout extends FrameLayout implements ValueAnimator.Animat
             float margin = 0;
             if (mIconVisible) {
                 if (iconH <= 0) {
-                    iconH = mContext.getResources().getDrawable(mTabEntitys.get(position).getTabSelectedIcon()).getIntrinsicHeight();
+                    iconH = mContext.getResources().getDrawable(mTabEntitysList.get(position).getTabSelectedIcon()).getIntrinsicHeight();
                 }
                 margin = mIconMargin;
             }

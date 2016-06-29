@@ -91,6 +91,7 @@ public class CommonTabActivity extends AppCompatActivity {
         mTabLayout_8.setTabData(mTabEntities);
 
         mTabLayout_3.setOnTabSelectListener(new OnTabSelectListener() {
+            //设置焦点位置
             @Override
             public void onTabSelect(int position) {
                 mTabLayout_1.setCurrentTab(position);
@@ -115,12 +116,14 @@ public class CommonTabActivity extends AppCompatActivity {
         mTabLayout_3.showDot(1);
         mTabLayout_4.showDot(1);
 
-        //两位数
-        mTabLayout_2.showMsg(0, 55);
+        //设置第一个表格的红色提示信息
+        mTabLayout_2.showMsg(0, 88);
+        //设置红色提示信息的位置
         mTabLayout_2.setMsgMargin(0, -5, 5);
 
         //三位数
-        mTabLayout_2.showMsg(1, 100);
+        mTabLayout_2.showMsg(1, 70);
+        //设置红色提示信息的位置
         mTabLayout_2.setMsgMargin(1, -5, 5);
 
         //设置未读消息红点
@@ -130,7 +133,7 @@ public class CommonTabActivity extends AppCompatActivity {
             UnreadMsgUtils.setSize(rtv_2_2, dp2px(7.5f));
         }
 
-        //设置未读消息背景
+        //设置未读消息背景颜色
         mTabLayout_2.showMsg(3, 5);
         mTabLayout_2.setMsgMargin(3, 0, 5);
         MsgView rtv_2_3 = mTabLayout_2.getMsgView(3);
